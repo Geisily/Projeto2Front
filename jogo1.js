@@ -7,10 +7,11 @@ class JogoNumeroSecreto {
         
         this.initElements();
         this.setupEvents();
+        this.iniciarJogo(); // Inicia automaticamente ao carregar
     }
     
     initElements() {
-        this.btnIniciar = document.getElementById('iniciarJogo');
+        this.btnReiniciar = document.getElementById('reiniciarJogo');
         this.btnVoltar = document.getElementById('voltar');
         this.dicaElement = document.getElementById('dica');
         
@@ -28,8 +29,14 @@ class JogoNumeroSecreto {
     }
     
     setupEvents() {
-        this.btnIniciar.addEventListener('click', () => this.iniciarJogo());
+        this.btnReiniciar.addEventListener('click', () => this.iniciarJogo());
         this.btnVoltar.addEventListener('click', () => window.location.href = 'index.html');
+        this.btnVerificar = document.getElementById('verificar');
+        this.inputPalpite = document.getElementById('palpite');
+        this.btnVerificar.addEventListener('click', () => this.verificarPalpite());
+        this.inputPalpite.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.verificarPalpite();
+        });
     }
     
     iniciarJogo() {
@@ -40,55 +47,41 @@ class JogoNumeroSecreto {
         // Resetar elementos visuais
         this.dicaElement.innerHTML = '<i class="fas fa-search"></i> Adivinhe o número entre 1 e 100';
         this.dicaElement.className = 'dica-inicio';
-        this.btnIniciar.innerHTML = '<i class="fas fa-sync-alt"></i> Reiniciar';
+        this.btnReiniciar.innerHTML = '<i class="fas fa-rotate-right"></i> Reiniciar';
         
         // Atualizar barra de progresso
         this.atualizarTentativas();
         
         // Efeito visual
-        this.btnIniciar.classList.add('btn-pulse');
-        setTimeout(() => this.btnIniciar.classList.remove('btn-pulse'), 500);
-        
-        this.jogar();
+        this.btnReiniciar.classList.add('btn-pulse');
+        setTimeout(() => this.btnReiniciar.classList.remove('btn-pulse'), 500);
+        this.inputPalpite.value = '';
+        this.inputPalpite.focus();
     }
     
-    jogar() {
-        if (!this.jogoAtivo || this.tentativas >= this.maxTentativas) {
-            this.finalizarJogo(false);
+    verificarPalpite() {
+        if (!this.jogoAtivo) return;
+        const palpite = parseInt(this.inputPalpite.value);
+        if (isNaN(palpite) || palpite < 1 || palpite > 100) {
+            this.dicaElement.textContent = 'Por favor, digite um número válido entre 1 e 100!';
+            this.dicaElement.className = 'feedback-error shake';
+            setTimeout(() => this.dicaElement.classList.remove('shake'), 500);
+            this.inputPalpite.focus();
             return;
         }
-        
-        const palpite = prompt(`Tentativa ${this.tentativas + 1}/${this.maxTentativas}\n\nDigite seu palpite (1 a 100):`);
-        
-        // Tratamento para cancelamento
-        if (palpite === null) {
-            if (confirm('Deseja sair do jogo atual?')) {
-                this.jogoAtivo = false;
-                this.dicaElement.textContent = 'Jogo interrompido. Clique em Reiniciar para jogar novamente.';
-                this.dicaElement.className = 'dica-interrompido';
-                return;
-            }
-            return this.jogar();
-        }
-        
-        const numero = parseInt(palpite);
-        
-        // Validação do input
-        if (isNaN(numero) || numero < 1 || numero > 100) {
-            alert("Por favor, digite um número válido entre 1 e 100!");
-            return this.jogar();
-        }
-        
         this.tentativas++;
         this.atualizarTentativas();
-        
-        // Verificação do palpite
-        if (numero === this.numeroSecreto) {
+        if (palpite === this.numeroSecreto) {
             this.finalizarJogo(true);
         } else {
-            const dica = numero < this.numeroSecreto ? 'MAIOR' : 'MENOR';
-            alert(`❌ Errou! O número secreto é ${dica} que ${numero}.\n\nTentativas restantes: ${this.maxTentativas - this.tentativas}`);
-            this.jogar();
+            const dica = palpite < this.numeroSecreto ? 'MAIOR' : 'MENOR';
+            this.dicaElement.innerHTML = `❌ Não é ${palpite}! O número secreto é <strong>${dica}</strong>.`;
+            this.dicaElement.className = 'feedback-warning pulse';
+            this.inputPalpite.value = '';
+            this.inputPalpite.focus();
+        }
+        if (this.tentativas >= this.maxTentativas && palpite !== this.numeroSecreto) {
+            this.finalizarJogo(false);
         }
     }
     

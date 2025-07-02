@@ -20,20 +20,44 @@
                 <i class="fas fa-search"></i> Clique em Jogar para começar!
             </div>
             
+            <div class="input-group">
+                <input type="number" id="palpite" min="1" max="100" placeholder="Seu palpite" class="number-input">
+                <button id="verificar" class="btn-primario">
+                    <i class="fas fa-check"></i> Verificar
+                </button>
+            </div>
+
             <div class="botoes-container">
-                <button id="iniciarJogo" class="btn-primario">
-                    <i class="fas fa-play"></i> Jogar
+                <button id="reiniciarJogo" class="btn-primario">
+                    <i class="fas fa-rotate-right"></i> Reiniciar
                 </button>
                 <button id="voltar" class="btn-secundario">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </button>
             </div>
+
+            <div class="resultado-vitoria" style="display:none;">
+                <i class="fas fa-trophy"></i>
+                <p>Parabéns! Você adivinhou o número!</p>
+                <div class="tentativas-container">
+                    <p>Você precisou de <span id="totalTentativasVitoria"></span> tentativas.</p>
+                </div>
+            </div>
+
+            <div class="resultado-derrota" style="display:none;">
+                <i class="fas fa-times-circle"></i>
+                <p>Que pena! Você errou o número.</p>
+                <div class="dica-derrota">
+                    <p id="dicaErro"></p>
+                </div>
+            </div>
         </main>
         
-        <footer>
-            <p class="creditos">Desenvolvido por Geisily</p>
-        </footer>
     </div>
+
+    <footer>
+        <p class="creditos">Desenvolvido por Geisily</p>
+    </footer>
 
     <script src="jogo1.js"></script>
 </body>
@@ -65,8 +89,9 @@
         box-shadow: var(--sombra-suave);
         border: 2px solid var(--lilas-claro);
         padding: 40px 32px 32px 32px;
-        max-width: 500px;
+        max-width: 540px;
         width: 100%;
+        min-width: 340px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -107,5 +132,63 @@
         background-color: var(--lilas-secundario);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin: 24px 0;
+    }
+    .number-input {
+        padding: 12px;
+        font-size: 1rem;
+        border: 2px solid var(--lilas-claro);
+        border-radius: var(--borda-arredondada);
+        box-shadow: var(--sombra-suave);
+        width: 100%;
+        max-width: 220px;
+        margin: 0 auto;
+    }
+    .resultado-vitoria, .resultado-derrota {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 2px; /* Menos espaçamento entre linhas */
+        margin: 0 auto;
+        color: var(--lilas-primario); /* Texto lilás */
+        font-size: 1.22rem; /* Letra um pouco maior */
+        font-weight: 600;
+    }
+    .dica-vitoria, .dica-derrota {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto 10px auto;
+        color: var(--lilas-primario); /* Texto lilás */
+        font-size: 1.18rem;
+        font-weight: 600;
+    }
+    .tentativas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+        color: var(--lilas-primario); /* Texto lilás */
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    .creditos {
+        margin: 0;
+        color: var(--lilas-primario);
+        font-size: 1.18rem;
+        font-weight: 600;
     }
 </style>
