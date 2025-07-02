@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos Educativos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #9b59b6;
+        }
+        .game-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            background-color: #c8a2c8; /* lilás */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #d8b2d8; /* lilás mais claro no hover */
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogos Educativos em JavaScript</h1>
+    <p>Escolha um dos jogos abaixo para começar:</p>
+    
+    <div class="game-buttons">
+        <button onclick="abrirJogo1()">Jogo dos Números Secretos</button>
+        <button onclick="abrirJogo2()">Jogo do Número Secreto Interativo</button>
+        <button onclick="abrirJogo3()">Jogo de Cálculo de Média</button>
+    </div>
+
+    <script>
+        function abrirJogo1() {
+            window.location.href = "jogo1.html";
+        }
+        
+        function abrirJogo2() {
+            window.location.href = "jogo2.html";
+        }
+        
+        function abrirJogo3() {
+            window.location.href = "jogo3.html";
+        }
+    </script>
+</body>
+</html>

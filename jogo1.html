@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo dos Números Secretos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #9b59b6;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #c8a2c8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #d8b2d8;
+        }
+        #dica {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo dos Números Secretos</h1>
+    <p>Tente adivinhar o número secreto entre 1 e 100!</p>
+    
+    <button onclick="iniciarJogo()">Jogar</button>
+    <button onclick="window.location.href='index.html'">Voltar</button>
+    
+    <div id="dica"></div>
+
+    <script>
+        let numeroSecreto;
+        let tentativas;
+        
+        function iniciarJogo() {
+            numeroSecreto = Math.floor(Math.random() * 100) + 1;
+            tentativas = 0;
+            document.getElementById('dica').textContent = '';
+            jogar();
+        }
+        
+        function jogar() {
+            let palpite = prompt("Digite seu palpite (1 a 100):");
+            
+            if (palpite === null) return;
+            
+            palpite = parseInt(palpite);
+            
+            if (isNaN(palpite)) {
+                alert("Por favor, digite um número válido!");
+                jogar();
+                return;
+            }
+            
+            tentativas++;
+            
+            if (palpite === numeroSecreto) {
+                document.getElementById('dica').textContent = 
+                    `Parabéns! Você acertou em ${tentativas} tentativas! O número era ${numeroSecreto}.`;
+            } else if (palpite < numeroSecreto) {
+                alert("O número secreto é MAIOR! Tente novamente.");
+                jogar();
+            } else {
+                alert("O número secreto é MENOR! Tente novamente.");
+                jogar();
+            }
+        }
+    </script>
+</body>
+</html>

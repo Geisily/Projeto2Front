@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Cálculo de Média</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #9b59b6;
+        }
+        .game-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #c8a2c8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #d8b2d8;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+        .nota-item {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Cálculo de Média</h1>
+    
+    <div class="game-container">
+        <p>Digite quantos números quiser (entre 0 e 100). Quando quiser parar, digite <strong>x</strong>:</p>
+        <button onclick="calcularMedia()">Calcular Média</button>
+        <button onclick="window.location.href='index.html'">Voltar</button>
+        
+        <div id="notas-container"></div>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularMedia() {
+            const notasContainer = document.getElementById('notas-container');
+            const resultado = document.getElementById('resultado');
+            
+            notasContainer.innerHTML = '';
+            resultado.textContent = '';
+            
+            let numeros = [];
+            let soma = 0;
+            let contador = 1;
+
+            while (true) {
+                let entrada = prompt(`Digite o número ${contador} (0 a 100) ou 'x' para parar:`);
+
+                if (entrada === null || entrada.toLowerCase() === 'x') {
+                    break;
+                }
+
+                let numero = parseFloat(entrada);
+
+                if (isNaN(numero)) {
+                    alert("Por favor, digite um número válido!");
+                    continue;
+                }
+
+                if (numero < 0 || numero > 100) {
+                    alert("O número deve estar entre 0 e 100!");
+                    continue;
+                }
+
+                numeros.push(numero);
+                soma += numero;
+
+                const numeroElement = document.createElement('div');
+                numeroElement.className = 'nota-item';
+                numeroElement.textContent = `Número ${contador}: ${numero}`;
+                notasContainer.appendChild(numeroElement);
+
+                contador++;
+            }
+
+            if (numeros.length === 0) {
+                resultado.textContent = "Nenhum número foi inserido.";
+                resultado.style.color = "#333";
+                return;
+            }
+
+            const media = soma / numeros.length;
+            resultado.textContent = `Média dos números: ${media.toFixed(2)}`;
+            resultado.style.color = "#2c3e50";
+        }
+    </script>
+</body>
+</html>
