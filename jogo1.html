@@ -4,86 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo dos Números Secretos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #9b59b6;
-        }
-        button {
-            padding: 12px 24px;
-            font-size: 16px;
-            background-color: #c8a2c8;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #d8b2d8;
-        }
-        #dica {
-            margin: 20px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Jogo dos Números Secretos</h1>
-    <p>Tente adivinhar o número secreto entre 1 e 100!</p>
-    
-    <button onclick="iniciarJogo()">Jogar</button>
-    <button onclick="window.location.href='index.html'">Voltar</button>
-    
-    <div id="dica"></div>
+    <div class="game-container">
+        <header>
+            <h1><i class="fas fa-lock"></i> Jogo dos Números Secretos</h1>
+            <p class="subtitulo">Tente adivinhar o número entre 1 e 100</p>
+        </header>
+        
+        <main class="game-area">
+            <div id="dica" class="dica-inicio">
+                <i class="fas fa-search"></i> Clique em Jogar para começar!
+            </div>
+            
+            <div class="botoes-container">
+                <button id="iniciarJogo" class="btn-primario">
+                    <i class="fas fa-play"></i> Jogar
+                </button>
+                <button id="voltar" class="btn-secundario">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </main>
+        
+        <footer>
+            <p class="creditos">Desenvolvido por Geisily</p>
+        </footer>
+    </div>
 
-    <script>
-        let numeroSecreto;
-        let tentativas;
-        
-        function iniciarJogo() {
-            numeroSecreto = Math.floor(Math.random() * 100) + 1;
-            tentativas = 0;
-            document.getElementById('dica').textContent = '';
-            jogar();
-        }
-        
-        function jogar() {
-            let palpite = prompt("Digite seu palpite (1 a 100):");
-            
-            if (palpite === null) return;
-            
-            palpite = parseInt(palpite);
-            
-            if (isNaN(palpite)) {
-                alert("Por favor, digite um número válido!");
-                jogar();
-                return;
-            }
-            
-            tentativas++;
-            
-            if (palpite === numeroSecreto) {
-                document.getElementById('dica').textContent = 
-                    `Parabéns! Você acertou em ${tentativas} tentativas! O número era ${numeroSecreto}.`;
-            } else if (palpite < numeroSecreto) {
-                alert("O número secreto é MAIOR! Tente novamente.");
-                jogar();
-            } else {
-                alert("O número secreto é MENOR! Tente novamente.");
-                jogar();
-            }
-        }
-    </script>
+    <script src="jogo1.js"></script>
 </body>
 </html>
+
+<style>
+    :root {
+        --lilas-primario: #8e44ad;
+        --lilas-secundario: #9b59b6;
+        --lilas-claro: #d2b4de;
+        --lilas-muito-claro: #f0e6f5;
+        --cinza-claro: #f5f5f5;
+        --branco: #fff;
+        --sombra-suave: 0 2px 10px rgba(0,0,0,0.08);
+        --borda-arredondada: 16px;
+    }
+    body {
+        background-color: var(--cinza-claro);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+    .game-container, .calculator-container {
+        background: var(--branco);
+        border-radius: var(--borda-arredondada);
+        box-shadow: var(--sombra-suave);
+        border: 2px solid var(--lilas-claro);
+        padding: 40px 32px 32px 32px;
+        max-width: 500px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 40px 0;
+    }
+    h1 {
+        color: var(--lilas-primario);
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    p.subtitulo {
+        text-align: center;
+        color: #555;
+        margin-bottom: 24px;
+    }
+    .botoes-container {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        width: 100%;
+        align-items: center;
+    }
+    button {
+        background-color: var(--lilas-primario);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        min-width: 220px;
+        font-size: 1.1rem;
+        padding: 14px 0;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
+    button:hover {
+        background-color: var(--lilas-secundario);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+</style>
