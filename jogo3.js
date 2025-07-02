@@ -29,7 +29,6 @@ class CalculadoraMedia {
             if (e.key === 'Enter') this.adicionarNumero();
         });
         
-        // Focar no input quando a página carregar
         this.inputNumero.focus();
     }
     
@@ -59,7 +58,6 @@ class CalculadoraMedia {
         this.inputNumero.value = '';
         this.inputNumero.focus();
         
-        // Efeito visual
         this.btnAdicionar.classList.add('btn-pulse');
         setTimeout(() => this.btnAdicionar.classList.remove('btn-pulse'), 300);
     }
@@ -80,7 +78,6 @@ class CalculadoraMedia {
             this.numberItems.appendChild(item);
         });
         
-        // Adiciona eventos aos botões de remover
         document.querySelectorAll('.btn-remove').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const index = parseInt(e.currentTarget.getAttribute('data-index'));
@@ -94,7 +91,6 @@ class CalculadoraMedia {
         this.atualizarListaNumeros();
         this.atualizarResultados();
         
-        // Efeito visual
         this.numberItems.classList.add('list-updated');
         setTimeout(() => this.numberItems.classList.remove('list-updated'), 300);
     }
@@ -105,10 +101,8 @@ class CalculadoraMedia {
             return;
         }
         
-        // Atualiza os resultados (já fazemos isso automaticamente)
         this.mostrarFeedback('Média calculada com sucesso!', 'success');
         
-        // Destaque visual
         this.mediaElement.parentElement.classList.add('result-highlight');
         setTimeout(() => {
             this.mediaElement.parentElement.classList.remove('result-highlight');
@@ -140,7 +134,6 @@ class CalculadoraMedia {
         this.atualizarResultados();
         this.inputNumero.focus();
         
-        // Efeito visual
         this.btnLimpar.classList.add('btn-pulse');
         setTimeout(() => this.btnLimpar.classList.remove('btn-pulse'), 300);
     }

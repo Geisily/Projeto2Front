@@ -7,7 +7,7 @@ class JogoNumeroSecreto {
         
         this.initElements();
         this.setupEvents();
-        this.iniciarJogo(); // Inicia automaticamente ao carregar
+        this.iniciarJogo();
     }
     
     initElements() {
@@ -15,7 +15,6 @@ class JogoNumeroSecreto {
         this.btnVoltar = document.getElementById('voltar');
         this.dicaElement = document.getElementById('dica');
         
-        // Criação do elemento de tentativas
         this.tentativasElement = document.createElement('div');
         this.tentativasElement.className = 'tentativas-container';
         this.tentativasElement.innerHTML = `
@@ -24,7 +23,6 @@ class JogoNumeroSecreto {
             </div>
             <span class="tentativas-texto">Tentativas: 0/${this.maxTentativas}</span>
         `;
-        // Corrigido: insere após o dicaElement
         this.dicaElement.parentNode.insertBefore(this.tentativasElement, this.dicaElement.nextSibling);
     }
     
@@ -44,15 +42,12 @@ class JogoNumeroSecreto {
         this.tentativas = 0;
         this.jogoAtivo = true;
         
-        // Resetar elementos visuais
         this.dicaElement.innerHTML = '<i class="fas fa-search"></i> Adivinhe o número entre 1 e 100';
         this.dicaElement.className = 'dica-inicio';
         this.btnReiniciar.innerHTML = '<i class="fas fa-rotate-right"></i> Reiniciar';
         
-        // Atualizar barra de progresso
         this.atualizarTentativas();
         
-        // Efeito visual
         this.btnReiniciar.classList.add('btn-pulse');
         setTimeout(() => this.btnReiniciar.classList.remove('btn-pulse'), 500);
         this.inputPalpite.value = '';
@@ -99,7 +94,6 @@ class JogoNumeroSecreto {
             `;
             this.dicaElement.className = 'dica-vitoria';
             
-            // Efeito de confete
             this.tentativasElement.classList.add('celebrate');
         } else {
             this.dicaElement.innerHTML = `
