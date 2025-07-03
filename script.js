@@ -53,12 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Jogo 2: alert/prompt, número secreto fixo 5 ---
+    // --- Jogo 2: alert/prompt, número secreto aleatório entre 1 e 10 ---
     const btnIniciarJogo2 = document.getElementById('btn-chutar-jogo2');
     if (btnIniciarJogo2) {
         btnIniciarJogo2.addEventListener('click', () => {
             alert('Seja bem-vindo ao nosso jogo!');
-            let numeroSecreto = 5;
+            // Gera número secreto aleatório entre 1 e 10
+            let numeroSecreto = Math.floor(Math.random() * 10) + 1;
             let chute;
             let tentativas = 0;
             let cancelado = false;
