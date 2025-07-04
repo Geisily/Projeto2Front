@@ -3,43 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPA Jogos</title>
+    <title>Projeto2</title>
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <div id="menu-principal">
-        <h1>Projeto 2 - Jogos</h1>
-        <div class="game-buttons">
-            <button id="btn-menu-jogo1">Jogo da Média</button>
-            <button id="btn-menu-jogo2">Jogo do Numero Secreto</button>
-            <button id="btn-menu-jogo3">Formulário</button>
-        </div>
+    <div class="container-botoes">
+        <button onclick="iniciarJogoSoma()">Jogo da Soma</button>
+        <button onclick="iniciarJogoMedia()">Jogo da Média</button>
+        <button onclick="iniciarJogoNumeroSecreto()">Jogo do Número Secreto</button>
     </div>
-    <section id="jogo1" class="secao-jogo" style="display:none;">
-        <h2>Jogo da Média</h2>
-        <button id="iniciar-jogo1">Iniciar</button>
-        <button class="btn-voltar">Voltar</button>
-    </section>
-    <section id="jogo2" class="secao-jogo" style="display:none;">
-        <h2>Jogo do Numero Secreto</h2>
-        <button id="btn-chutar-jogo2">Chutar</button>
-        <button class="btn-voltar">Voltar</button>
-    </section>
-    <section id="jogo3" class="secao-jogo" style="display:none;">
-        <h2>Formulário para exportação TXT</h2>
-        <form id="formulario">
-            <input type="text" id="valor1" placeholder="Valor 1">
-            <input type="text" id="valor2" placeholder="Valor 2">
-            <input type="text" id="valor3" placeholder="Valor 3">
-            <input type="text" id="valor4" placeholder="Valor 4">
-            <input type="text" id="valor5" placeholder="Valor 5">
-            <button type="submit">Exportar para TXT</button>
-        </form>
-        <button class="btn-voltar">Voltar</button>
-    </section>
-    <footer style="text-align:center; margin: 2.5rem 0 1rem 0; color: #b197fc; font-size: 1.05rem; font-family: 'Segoe UI', Arial, sans-serif; letter-spacing: 0.5px;">
-        Desenvolvido por Geisily Vargas
-    </footer>
-    <script src="script.js"></script>
 </body>
 </html>
